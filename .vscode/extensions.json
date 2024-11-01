@@ -5,7 +5,6 @@
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
     "dbaeumer.vscode-eslint",
-    "svelte.svelte-vscode",
     "bradlc.vscode-tailwindcss"
   ],
   "unwantedRecommendations": []

@@ -6,8 +6,8 @@
   },
   "css.validate": false,
   "scss.validate": false,
-  "stylelint.validate": ["css", "astro", "svelte"],
-  "eslint.validate": ["javascript", "typescript", "astro", "svelte"],
+  "stylelint.validate": ["css", "astro"],
+  "eslint.validate": ["javascript", "typescript", "astro"],
   "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -26,9 +26,6 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "[json][jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
