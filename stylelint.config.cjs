@@ -5,7 +5,7 @@ module.exports = {
     "stylelint-config-html",
   ],
   rules: {
-    "at-rule-no-unknown": [true,{"ignoreAtRules":["tailwind"]}],
+    "at-rule-no-unknown": [true, { ignoreAtRules: ["tailwind"] }],
     "custom-property-pattern": null,
     "function-name-case": null,
     "keyframes-name-pattern": null,
