@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "rebaseWhen": "never",
+  "schedule": ["before 4am on Monday"],
+  "timezone": "Asia/Tokyo"
+}
