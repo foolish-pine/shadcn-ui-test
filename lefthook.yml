@@ -1,0 +1,14 @@
+pre-commit:
+  piped: true
+  commands:
+    1_eslint:
+      glob: "*.{astro,js,cjs,mjs,ts,jsx,tsx}"
+      run: npx eslint --fix --quiet {staged_files}
+    2_stylelint:
+      glob: "*.{astro,css,scss}"
+      run: npx stylelint --fix --quiet {staged_files}
+    3_prettier:
+      run: npx prettier --write --log-level=error --ignore-unknown --plugin prettier-plugin-astro {staged_files}
+    4_astro:
+      glob: "*.{astro,js,ts,jsx,tsx}"
+      run: npx astro check
