@@ -16,20 +16,18 @@ export const formSchema = z.object({
 });
 
 export const PostList = ({ tagCategories, tags, posts }: Props) => {
-  const [selectedFilters, setSelectedFilters] = useState<Set<Tag["id"]>>(
-    new Set(),
-  );
+  const [selectedTags, setSelectedTags] = useState<Set<Tag["id"]>>(new Set());
 
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
     const { tags } = data;
 
-    setSelectedFilters(new Set(tags));
+    setSelectedTags(new Set(tags));
   };
 
-  const filteredPosts = selectedFilters.size
+  const filteredPosts = selectedTags.size
     ? posts.filter((post) => {
         const tagIds = new Set(post.tags.map((tag) => tag.id));
-        return selectedFilters.intersection(tagIds).size !== 0;
+        return selectedTags.intersection(tagIds).size !== 0;
       })
     : posts;
 
