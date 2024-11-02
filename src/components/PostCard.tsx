@@ -1,5 +1,6 @@
 import { memo } from "react";
 
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardDescription,
@@ -25,7 +26,9 @@ export const PostCard = memo(({ post: { title, tags } }: Props) => {
       <CardFooter className="p-4 pt-0">
         <ul className="flex flex-wrap gap-1.5 text-sm">
           {tags.map(({ id, label }) => (
-            <li key={id}>#{label}</li>
+            <li key={id}>
+              <Badge variant="secondary">{label}</Badge>
+            </li>
           ))}
         </ul>
       </CardFooter>
