@@ -1,9 +1,9 @@
 // @ts-check
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
+import tailwind from "@astrojs/tailwind";
+import { defineConfig } from "astro/config";
 import robotsTxt from "astro-robots-txt";
-import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +16,12 @@ export default defineConfig({
     host: true,
     open: true,
   },
-  integrations: [react(), tailwind({
-    applyBaseStyles: false,
-  }), sitemap(), robotsTxt()]
+  integrations: [
+    react(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    sitemap(),
+    robotsTxt(),
+  ],
 });

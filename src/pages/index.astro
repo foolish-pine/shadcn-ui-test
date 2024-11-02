@@ -1,25 +1,134 @@
 ---
 import "@/styles/global.css";
 
-import { Button } from "@/components/ui/button";
+import { PostList } from "@/components/PostList";
 
 import Layout from "../layouts/Layout.astro";
+
+export type TagCategory = {
+  id: string;
+  label: string;
+};
+
+export type Tag = {
+  id: string;
+  label: string;
+  category: (typeof tagCategories)[number]["id"];
+};
+
+export type Post = {
+  id: number;
+  title: string;
+  body: string;
+  tags: Tag[];
+};
+
+const tagCategories: TagCategory[] = [
+  {
+    id: "area",
+    label: "エリア",
+  },
+  {
+    id: "occupation",
+    label: "職種",
+  },
+];
+
+const tags: Tag[] = [
+  {
+    id: "sannomiya",
+    label: "三宮",
+    category: "area",
+  },
+  {
+    id: "suma",
+    label: "須磨",
+    category: "area",
+  },
+  {
+    id: "akashi",
+    label: "明石",
+    category: "area",
+  },
+  {
+    id: "restaurant",
+    label: "飲食業",
+    category: "occupation",
+  },
+  {
+    id: "manufacturing",
+    label: "製造業",
+    category: "occupation",
+  },
+  {
+    id: "education",
+    label: "教育",
+    category: "occupation",
+  },
+];
+
+const posts: Post[] = [
+  {
+    id: 1,
+    title: "投稿1",
+    body: "本文",
+    tags: [
+      {
+        id: "suma",
+        label: "須磨",
+        category: "area",
+      },
+      {
+        id: "education",
+        label: "教育",
+        category: "occupation",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "投稿2",
+    body: "本文",
+    tags: [
+      {
+        id: "akashi",
+        label: "明石",
+        category: "area",
+      },
+      {
+        id: "manufacturing",
+        label: "製造業",
+        category: "occupation",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "投稿3",
+    body: "本文",
+    tags: [
+      {
+        id: "sannomiya",
+        label: "三宮",
+        category: "area",
+      },
+      {
+        id: "restaurant",
+        label: "飲食業",
+        category: "occupation",
+      },
+    ],
+  },
+];
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Demo Site">
   <main>
-    <Button>Hello World</Button>
+    <PostList
+      tagCategories={tagCategories}
+      tags={tags}
+      posts={posts}
+      client:load
+    />
   </main>
 </Layout>
-
-<style>
-  main {
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    padding: 1rem;
-    margin: auto;
-    font-size: 20px;
-    line-height: 1.6;
-    color: white;
-  }
-</style>
