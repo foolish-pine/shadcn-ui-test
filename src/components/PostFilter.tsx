@@ -12,13 +12,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import type { Tag, TagCategory } from "@/pages/index.astro";
+import type { TagCategory, TagWithPostCount } from "@/pages/index.astro";
 
 import { formSchema } from "./PostList";
 
 type Props = {
   tagCategories: TagCategory[];
-  tags: Tag[];
+  tags: TagWithPostCount[];
   handleSubmit: (data: z.infer<typeof formSchema>) => void;
 };
 
@@ -79,6 +79,7 @@ export const PostFilter = ({ tagCategories, tags, handleSubmit }: Props) => {
                                   </FormControl>
                                   <FormLabel className="font-normal">
                                     {tag.label}
+                                    <span className="ml-1">{`(${tag.postCount})`}</span>
                                   </FormLabel>
                                 </FormItem>
                               );

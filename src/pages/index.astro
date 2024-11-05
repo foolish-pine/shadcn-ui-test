@@ -5,6 +5,13 @@ import { PostList } from "@/components/PostList";
 
 import Layout from "../layouts/Layout.astro";
 
+export type Post = {
+  id: number;
+  title: string;
+  body: string;
+  tags: Tag[];
+};
+
 export type TagCategory = {
   id: string;
   label: string;
@@ -13,15 +20,140 @@ export type TagCategory = {
 export type Tag = {
   id: string;
   label: string;
-  category: (typeof tagCategories)[number]["id"];
+  category: string;
 };
 
-export type Post = {
-  id: number;
-  title: string;
-  body: string;
-  tags: Tag[];
+export type TagWithPostCount = Tag & {
+  postCount: number;
 };
+
+const posts: Post[] = [
+  {
+    id: 1,
+    title: "投稿1",
+    body: "本文",
+    tags: [
+      {
+        id: "suma",
+        label: "須磨エリア",
+        category: "area",
+      },
+      {
+        id: "education",
+        label: "教育",
+        category: "occupation",
+      },
+      {
+        id: "remote",
+        label: "リモート",
+        category: "work-style",
+      },
+      {
+        id: "permanent",
+        label: "正社員",
+        category: "work-style",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "投稿2",
+    body: "本文",
+    tags: [
+      {
+        id: "akashi",
+        label: "明石エリア",
+        category: "area",
+      },
+      {
+        id: "manufacturing",
+        label: "製造業",
+        category: "occupation",
+      },
+      {
+        id: "permanent",
+        label: "正社員",
+        category: "work-style",
+      },
+      {
+        id: "flex",
+        label: "フレックスタイム制",
+        category: "work-style",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "投稿3",
+    body: "本文",
+    tags: [
+      {
+        id: "sannomiya",
+        label: "三宮エリア",
+        category: "area",
+      },
+      {
+        id: "restaurant",
+        label: "飲食業",
+        category: "occupation",
+      },
+      {
+        id: "permanent",
+        label: "正社員",
+        category: "work-style",
+      },
+      {
+        id: "part-time",
+        label: "アルバイト",
+        category: "work-style",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "投稿4",
+    body: "本文",
+    tags: [
+      {
+        id: "sannomiya",
+        label: "明石エリア",
+        category: "area",
+      },
+      {
+        id: "restaurant",
+        label: "飲食業",
+        category: "occupation",
+      },
+      {
+        id: "part-time",
+        label: "アルバイト",
+        category: "work-style",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "投稿5",
+    body: "本文",
+    tags: [
+      {
+        id: "akashi",
+        label: "明石エリア",
+        category: "area",
+      },
+      {
+        id: "education",
+        label: "教育",
+        category: "occupation",
+      },
+      {
+        id: "remote",
+        label: "リモート",
+        category: "work-style",
+      },
+    ],
+  },
+];
 
 const tagCategories: TagCategory[] = [
   {
@@ -32,22 +164,31 @@ const tagCategories: TagCategory[] = [
     id: "occupation",
     label: "職種",
   },
+  {
+    id: "work-style",
+    label: "働き方",
+  },
 ];
 
 const tags: Tag[] = [
   {
     id: "sannomiya",
-    label: "三宮",
+    label: "三宮エリア",
     category: "area",
   },
   {
     id: "suma",
-    label: "須磨",
+    label: "須磨エリア",
     category: "area",
   },
   {
     id: "akashi",
-    label: "明石",
+    label: "明石エリア",
+    category: "area",
+  },
+  {
+    id: "himeji",
+    label: "姫路エリア",
     category: "area",
   },
   {
@@ -65,68 +206,105 @@ const tags: Tag[] = [
     label: "教育",
     category: "occupation",
   },
+  {
+    id: "remote",
+    label: "リモート",
+    category: "work-style",
+  },
+  {
+    id: "flex",
+    label: "フレックスタイム制",
+    category: "work-style",
+  },
+  {
+    id: "permanent",
+    label: "正社員",
+    category: "work-style",
+  },
+  {
+    id: "part-time",
+    label: "アルバイト",
+    category: "work-style",
+  },
 ];
 
-const posts: Post[] = [
+const postCountByTag = posts.reduce(
+  (acc, post) => {
+    post.tags.map((tag) => acc.set(tag.id, (acc.get(tag.id) || 0) + 1));
+    return acc;
+  },
+  new Map<string, number>(tags.map((tag) => [tag.id, 0])),
+);
+
+const tagsWithPostCount: TagWithPostCount[] = [
   {
-    id: 1,
-    title: "投稿1",
-    body: "本文",
-    tags: [
-      {
-        id: "suma",
-        label: "須磨",
-        category: "area",
-      },
-      {
-        id: "education",
-        label: "教育",
-        category: "occupation",
-      },
-    ],
+    id: "sannomiya",
+    label: "三宮エリア",
+    category: "area",
   },
   {
-    id: 2,
-    title: "投稿2",
-    body: "本文",
-    tags: [
-      {
-        id: "akashi",
-        label: "明石",
-        category: "area",
-      },
-      {
-        id: "manufacturing",
-        label: "製造業",
-        category: "occupation",
-      },
-    ],
+    id: "suma",
+    label: "須磨エリア",
+    category: "area",
   },
   {
-    id: 3,
-    title: "投稿3",
-    body: "本文",
-    tags: [
-      {
-        id: "sannomiya",
-        label: "三宮",
-        category: "area",
-      },
-      {
-        id: "restaurant",
-        label: "飲食業",
-        category: "occupation",
-      },
-    ],
+    id: "akashi",
+    label: "明石エリア",
+    category: "area",
   },
-];
+  {
+    id: "himeji",
+    label: "姫路エリア",
+    category: "area",
+  },
+  {
+    id: "restaurant",
+    label: "飲食業",
+    category: "occupation",
+  },
+  {
+    id: "manufacturing",
+    label: "製造業",
+    category: "occupation",
+  },
+  {
+    id: "education",
+    label: "教育",
+    category: "occupation",
+  },
+  {
+    id: "remote",
+    label: "リモート",
+    category: "work-style",
+  },
+  {
+    id: "flex",
+    label: "フレックスタイム制",
+    category: "work-style",
+  },
+  {
+    id: "permanent",
+    label: "正社員",
+    category: "work-style",
+  },
+  {
+    id: "part-time",
+    label: "アルバイト",
+    category: "work-style",
+  },
+].map((tag) => {
+  return {
+    ...tag,
+    postCount: postCountByTag.get(tag.id) ?? 0,
+  };
+});
 ---
 
 <Layout title="Demo Site">
   <main>
     <PostList
       tagCategories={tagCategories}
-      tags={tags}
+      tags={tagsWithPostCount}
       posts={posts}
       client:load
     />

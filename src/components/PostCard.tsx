@@ -17,7 +17,7 @@ interface Props {
 
 export const PostCard = memo(({ post: { title, tags } }: Props) => {
   return (
-    <Card className="shadow-none">
+    <Card className="h-full shadow-none">
       <img src={thumbnailImage.src} alt="" className="rounded-t-lg" />
       <CardHeader className="p-4">
         <CardTitle className="text-lg">{title}</CardTitle>
